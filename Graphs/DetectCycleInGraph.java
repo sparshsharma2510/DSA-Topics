@@ -89,8 +89,41 @@ public class DetectCycleInGraph{
         }
         return false;
     }
-    //BFS In directed not done as of yet
-    private void isCycleBfsDG(List<List<Integer>> adj){
 
+    private static boolean isCycleBfsDG(List<List<Integer>> adj){
+    	//This is based on the fact that if we can't generate the topological sort,
+    	//then the graph must contain a cycle
+    	int n = adj.size();
+    	//Step 1: Build Indegree
+    	int[] indegree = new int[n];
+    	for(int i = 0; i < n; i++){
+    		for(int neighbour: adj.get(i))
+    			indegree[neighbour]++;
+    	}
+
+    	Queue<Integer> queue = new LinkedList<>();
+    	for(int i = 0; i < n; i++){
+    		if(indegree[i] == 0)
+    			queue.offer(i);
+    	}
+    	int nodesWhoseIndegreeIsZero = 0;
+    	while(!queue.isEmpty()){
+    		int curr = queue.poll();
+    		nodesWhoseIndegreeIsZero++;
+    		for(int neighbour: adj.get(curr)){
+    			indegree[neighbour]--;
+    			if(indegree[neighbour] == 0)
+    				queue.offer(neighbour);
+    		}
+    	}
+    	if(nodesWhoseIndegreeIsZero == n)
+    		return false;
+    	return true;
+    	//OR WE CAN DO THE BELOW CHECK
+    	// for(int el: indegree){
+    	// 	if(el > 0)
+    	// 		return true;
+    	// }
+    	// return false;
     }
 }
