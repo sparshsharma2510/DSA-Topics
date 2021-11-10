@@ -84,7 +84,7 @@ public class DetectCycleInGraph{
                 if(isCycleDfsDG(adj, visited, dfsVisited, neighbour))
                     return true;
             }
-            else if(dfsVisited[curr])
+            else if(dfsVisited[neighbour])
                 return true;
         }
         return false;
