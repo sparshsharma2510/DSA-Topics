@@ -16,6 +16,7 @@ public class BridgesInGraph{
 		// getBridges(adj,null);
 	}
 	/*
+		EDGE CUTTING ALGO:
 		This algo is just a normal dfs with a logic to check if the edge between a node and its neighbour forms a bridge or not
 
 		we firstly do a dfs on the neighbours of the node.
@@ -25,7 +26,8 @@ public class BridgesInGraph{
 		if yes then we know that this can't be a bridge as there exists another way also to reach the neigbour or vice-versa
 
 		but if the lowtime of neighbour is greater this means that it is not possible to reach neighbour node in a time
-		lesser than the insertion of the current node thus we can gurantee that this edge is a bridge
+		lesser than the insertion of the current node thus we can gurantee that this edge is a bridge.
+		audio file for intuition will be attached soon
 	*/
 	private static void getBridges(List<List<Integer>> adj, int curr, Integer parent){
 		visited[curr] = true;
