@@ -30,7 +30,7 @@ public class BellmanFord{
 		to a negative cycle!
 	*/
 	private static void detectNegativeCycle(List<Node> edges, int V, int src){
-		int[] dist = new int[V];
+		long[] dist = new long[V];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 		dist[src] = 0;
 
