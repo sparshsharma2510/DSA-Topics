@@ -19,12 +19,40 @@ public class ShortestPathAlgos{
 	public static void main(String[] args) {
 		
 	}
+	
+	/* 0-1 BFS */
+	private static void Bfs01(List<List<Node>> adj, int src){
+		Deque<Node> deque = new LinkedList<>();		
+		int n = adj.size();
+		int[] dist = new int[n];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+
+		deque.offerFirst(new Node(src, 0));
+		while(!deque.isEmpty()){
+			Node curr = deque.pollFirst();
+			for(Node neighbourNode: adj.get(curr.node)){
+				int neighbour = neighbourNode.node;
+				int wt = neighbourNode.weight;
+				if(dist[neighbourNode.node] > dist[curr.node]+wt){
+					dist[neighbourNode.node] = dist[curr.node]+wt;
+					if(wt == 0)
+						deque.offerFirst(new Node(neighbour, curr.weight));
+					else
+						deque.offerLast(new Node(neighbour, curr.weight+wt));
+				}
+			}
+		}
+
+		System.out.println(Arrays.toString(dist));
+	}
+
+	
 	/*
 		Dijkstra's algo is used to find the shortest path in both directed and undirected
 		graphs provided that the edge weights should not be negative. The graph may or may
 		not contain cycle
 
-		TIME: 
+		TIME: nlogn
 	*/
 	private static void dijkstra(List<List<Node>> adj, int src){
 		int n = adj.size();
